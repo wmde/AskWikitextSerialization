@@ -1,7 +1,7 @@
 {
 	"name": "ask/wikitext-serialization",
 	"type": "library",
-	"description": "",
+	"description": "Wikitext serialializers and deserializers for the Ask query language",
 	"keywords": [
 		"ask",
 		"wikidata",
