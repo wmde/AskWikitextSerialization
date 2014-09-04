@@ -1,4 +1,4 @@
-# As kWikitext Serialization
+# Ask Wikitext Serialization
 
 Wikitext serialializers and deserializers for the Ask query language.
 
