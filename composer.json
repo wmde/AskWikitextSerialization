@@ -1,0 +1,35 @@
+{
+	"name": "ask/wikitext-serialization",
+	"type": "library",
+	"description": "",
+	"keywords": [
+		"ask",
+		"wikidata",
+		"SMW",
+		"Semantic MediaWiki"
+	],
+	"homepage": "https://github.com/wmde/AskWikitextSerialization",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Jeroen De Dauw",
+			"email": "jeroendedauw@gmail.com",
+			"homepage": "http://jeroendedauw.com"
+		},
+		{
+			"name": "Jan Zerebecki"
+		}
+	],
+	"support": {
+		"irc": "irc://irc.freenode.net/wikidata"
+	},
+	"require": {
+		"php": ">=5.3.0",
+		"ask/ask": "~1.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Ask\\Wikitext\\": "src/"
+		}
+	}
+}
