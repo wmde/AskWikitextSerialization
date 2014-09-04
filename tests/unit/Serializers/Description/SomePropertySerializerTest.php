@@ -22,7 +22,7 @@ class SomePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$formatter = new SomePropertySerializer();
 
-		$this->assertEquals( '[[P42::+]]', $formatter->format( $someProperty ) );
+		$this->assertEquals( '[[P42::+]]', $formatter->serialize( $someProperty ) );
 	}
 
 }

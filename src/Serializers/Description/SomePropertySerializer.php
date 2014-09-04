@@ -2,17 +2,21 @@
 
 namespace Ask\Wikitext\Serializers\Description;
 
-use Ask\Language\Description\SomeProperty;
+use Serializers\Serializer;
 
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class SomePropertySerializer {
+class SomePropertySerializer implements Serializer {
 
-	public function format( SomeProperty $someProperty ) {
+	/**
+	 * @see Serializer::serialize
+	 */
+	public function serialize( $object ) {
 		$formatter = new AnyValueSerializer();
-		return '[[' . $someProperty->getPropertyId()->getValue() . '::' . $formatter->format( $someProperty->getSubDescription() ) . ']]';
+		return '[[' . $object->getPropertyId()->getValue() . '::' . $formatter->serialize( $object->getSubDescription() ) . ']]';
 	}
+
 }

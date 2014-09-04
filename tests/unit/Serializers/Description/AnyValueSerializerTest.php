@@ -19,7 +19,7 @@ class AnyValueSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$formatter = new AnyValueSerializer();
 
-		$this->assertEquals( '+', $formatter->format( $anyValue ) );
+		$this->assertEquals( '+', $formatter->serialize( $anyValue ) );
 	}
 
 }
