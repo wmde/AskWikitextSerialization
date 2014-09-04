@@ -1,14 +1,13 @@
 <?php
 
-namespace Ask\Wikitext\Formatter\Description;
-
-use Ask\Language\Description\AnyValue;
+namespace Ask\Wikitext\Serializers\Description;
 
 /**
  * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class AnyValueFormatter {
+class AnyValueSerializer {
 
 	public function format( $anyValue ) {
 		return '+';

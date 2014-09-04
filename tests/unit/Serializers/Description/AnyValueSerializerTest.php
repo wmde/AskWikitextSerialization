@@ -3,20 +3,21 @@
 namespace Ask\Tests\Ask\Wikitext\Formatter\Description;
 
 use Ask\Language\Description\AnyValue;
-use Ask\Wikitext\Formatter\Description\AnyValueFormatter;
+use Ask\Wikitext\Serializers\Description\AnyValueSerializer;
 
 /**
- * @covers Ask\Wikitext\Formatter\Description\AnyValueFormatter
+ * @covers Ask\Wikitext\Serializers\Description\AnyValueSerializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class AnyValueFormatterTest extends \PHPUnit_Framework_TestCase {
+class AnyValueSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testFormatAnyValue() {
 		$anyValue = new AnyValue();
 
-		$formatter = new AnyValueFormatter();
+		$formatter = new AnyValueSerializer();
 
 		$this->assertEquals( '+', $formatter->format( $anyValue ) );
 	}
