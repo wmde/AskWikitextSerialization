@@ -32,7 +32,7 @@ class ValueDescriptionSerializer implements Serializer {
 	private function getComparatorSerialization( $comparator ) {
 		$comparators = array(
 			ValueDescription::COMP_EQUAL => '',
-			ValueDescription::COMP_GREATER => '>',
+			ValueDescription::COMP_GREATER => '>>',
 		);
 
 		return $comparators[$comparator];
