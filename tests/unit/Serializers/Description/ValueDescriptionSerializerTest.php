@@ -45,6 +45,12 @@ class ValueDescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function comparatorProvider() {
 		return array(
 			array( ValueDescription::COMP_EQUAL, 'foobar' ),
+			array( ValueDescription::COMP_LEQ, '≤foobar' ),
+			array( ValueDescription::COMP_GEQ, '≥foobar' ),
+			array( ValueDescription::COMP_NEQ, '!foobar' ),
+			array( ValueDescription::COMP_LIKE, '~foobar' ),
+			array( ValueDescription::COMP_NLIKE, '!~foobar' ),
+			array( ValueDescription::COMP_LESS, '<<foobar' ),
 			array( ValueDescription::COMP_GREATER, '>>foobar' ),
 		);
 	}
