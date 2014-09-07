@@ -3,6 +3,8 @@
 namespace Ask\Wikitext\Serializers\Description;
 
 use Serializers\Serializer;
+use InvalidArgumentException;
+use Ask\Language\Description\SomeProperty;
 
 /**
  * @licence GNU GPL v2+
@@ -14,9 +16,18 @@ class SomePropertySerializer implements Serializer {
 	/**
 	 * @see Serializer::serialize
 	 */
-	public function serialize( $object ) {
-		$formatter = new AnyValueSerializer();
-		return '[[' . $object->getPropertyId()->getValue() . '::' . $formatter->serialize( $object->getSubDescription() ) . ']]';
+	public function serialize( $someProperty ) {
+		if ( $someProperty instanceof SomeProperty ) {
+			return $this->serializeSomeProperty( $someProperty );
+		}
+
+		throw new InvalidArgumentException( 'Can only serialize instances of SomeProperty' );
+	}
+
+	private function serializeSomeProperty( SomeProperty $someProperty ) {
+		$serializer = new AnyValueSerializer();
+		return '[[' . $someProperty->getPropertyId()->getValue() .
+			'::' . $serializer->serialize( $someProperty->getSubDescription() ) . ']]';
 	}
 
 }
