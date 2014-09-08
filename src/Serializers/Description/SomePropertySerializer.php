@@ -2,7 +2,7 @@
 
 namespace Ask\Wikitext\Serializers\Description;
 
-use Serializers\Serializer;
+use Serializers\DispatchableSerializer;
 use InvalidArgumentException;
 use Ask\Language\Description\SomeProperty;
 
@@ -11,13 +11,20 @@ use Ask\Language\Description\SomeProperty;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class SomePropertySerializer implements Serializer {
+class SomePropertySerializer implements DispatchableSerializer {
+
+	/**
+	 * @see DispatchableSerializer::isSerializerFor
+	 */
+	public function isSerializerFor( $object ) {
+		return ( $object instanceof SomeProperty );
+	}
 
 	/**
 	 * @see Serializer::serialize
 	 */
 	public function serialize( $someProperty ) {
-		if ( $someProperty instanceof SomeProperty ) {
+		if ( $this->isSerializerFor( $someProperty ) ) {
 			return $this->serializeSomeProperty( $someProperty );
 		}
 

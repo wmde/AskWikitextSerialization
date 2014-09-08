@@ -2,7 +2,7 @@
 
 namespace Ask\Wikitext\Serializers\Description;
 
-use Serializers\Serializer;
+use Serializers\DispatchableSerializer;
 use Ask\Language\Description\AnyValue;
 use InvalidArgumentException;
 
@@ -11,13 +11,20 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class AnyValueSerializer implements Serializer {
+class AnyValueSerializer implements DispatchableSerializer {
+
+	/**
+	 * @see DispatchableSerializer::isSerializerFor
+	 */
+	public function isSerializerFor( $object ) {
+		return ( $object instanceof AnyValue );
+	}
 
 	/**
 	 * @see Serializer::serialize
 	 */
 	public function serialize( $object ) {
-		if ( $object instanceof AnyValue ) {
+		if ( $this->isSerializerFor( $object ) ) {
 			return '+';
 		}
 
