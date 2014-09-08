@@ -6,6 +6,7 @@ use Ask\Language\Description\ValueDescription;
 use Ask\Wikitext\Serializers\Description\ValueDescriptionSerializer;
 use DataValues\StringValue;
 use Serializers\Serializer;
+use Ask\Language\Description\AnyValue;
 
 /**
  * @covers Ask\Wikitext\Serializers\Description\ValueDescriptionSerializer
@@ -27,7 +28,7 @@ class ValueDescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNonValueDescription_serializeThrowsException() {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$this->serializer->serialize( null );
+		$this->serializer->serialize( new AnyValue() );
 	}
 
 	/**
