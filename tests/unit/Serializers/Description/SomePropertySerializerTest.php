@@ -1,6 +1,6 @@
 <?php
 
-namespace Ask\Tests\Ask\Wikitext\Formatter\Description;
+namespace Ask\Tests\Ask\Wikitext\Serializers\Description;
 
 use Ask\Language\Description\AnyValue;
 use Ask\Language\Description\SomeProperty;
