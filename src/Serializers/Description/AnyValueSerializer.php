@@ -3,6 +3,8 @@
 namespace Ask\Wikitext\Serializers\Description;
 
 use Serializers\Serializer;
+use Ask\Language\Description\AnyValue;
+use InvalidArgumentException;
 
 /**
  * @licence GNU GPL v2+
@@ -15,7 +17,11 @@ class AnyValueSerializer implements Serializer {
 	 * @see Serializer::serialize
 	 */
 	public function serialize( $object ) {
-		return '+';
+		if ( $object instanceof AnyValue ) {
+			return '+';
+		}
+
+		throw new InvalidArgumentException( 'Can only serialize instances of AnyValue' );
 	}
 
 }
