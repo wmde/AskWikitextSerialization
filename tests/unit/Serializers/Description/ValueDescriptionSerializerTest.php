@@ -56,4 +56,8 @@ class ValueDescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGivenValueDescriptionWithValueThatDoesNotCastToString() {
+		$this->markTestIncomplete();
+	}
+
 }
