@@ -39,7 +39,11 @@ class SomePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenSomePropertyWithAnotherDescription() {
-		$this->markTestIncomplete();
+		$propertyId = new StringValue( 'P42' );
+		$anotherDescription = new SomeProperty( new StringValue( 'P21' ), new AnyValue() );
+		$someProperty = new SomeProperty( $propertyId, $anotherDescription );
+
+		$this->assertEquals( '[[P42::<q>[[P21::+]]</q>]]', $this->serializer->serialize( $someProperty ) );
 	}
 
 	public function testGivenSomePropertyWithValueThatDoesNotCastToString() {
