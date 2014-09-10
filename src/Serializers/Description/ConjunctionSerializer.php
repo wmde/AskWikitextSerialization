@@ -6,8 +6,7 @@ use Serializers\DispatchableSerializer;
 use Ask\Language\Description\Conjunction;
 use Ask\Language\Description\Description;
 use InvalidArgumentException;
-use Ask\Wikitext\Serializers\Factory;
-use Serializers\DispatchingSerializer;
+use Ask\Wikitext\Serializers\Description\DescriptionCollectionSerializer;
 
 /**
  * @licence GNU GPL v2+
@@ -16,9 +15,9 @@ use Serializers\DispatchingSerializer;
 class ConjunctionSerializer implements DispatchableSerializer {
 
 	/**
-	 * @var DispatchingSerializer
+	 * @var DescriptionCollectionSerializer
 	 */
-	private $descriptionSerializer = null;
+	private $collectionSerializer = null;
 
 	/**
 	 * @see DispatchableSerializer::isSerializerFor
@@ -35,33 +34,21 @@ class ConjunctionSerializer implements DispatchableSerializer {
 			return $this->serializeConjunction( $object );
 		}
 
-		throw new InvalidArgumentException( 'Can only serialize instances of AnyValue' );
+		throw new InvalidArgumentException( 'Can only serialize instances of Conjunction' );
+	}
+
+	/**
+	 * @return DescriptionCollectionSerializer
+	 */
+	private function serializer() {
+		if (is_null($this->collectionSerializer)) {
+			$this->collectionSerializer = new DescriptionCollectionSerializer(' ');
+		}
+		return $this->collectionSerializer;
 	}
 
 	private function serializeConjunction( Conjunction $conjunction ) {
-		$result = '';
-		$firstItem = true;
-		foreach ( $conjunction->getDescriptions() as $description) {
-			if (!$firstItem) {
-				$result .= ' ';
-			} else {
-				$firstItem = false;
-			}
-			$result .= $this->serializeDescription( $description );
-		}
-		return $result;
-	}
-
-	private function serializer() {
-		if (is_null($this->descriptionSerializer)) {
-			$factory = new Factory();
-			$this->descriptionSerializer = $factory->createDescriptionSerializer();
-		}
-		return $this->descriptionSerializer;
-	}
-
-	private function serializeDescription( Description $description ) {
-		return $this->serializer()->serialize( $description );
+		return $this->serializer()->serialize( $conjunction );
 	}
 
 }
