@@ -18,6 +18,8 @@ class Factory {
 		$serializer->addSerializer( new \Ask\Wikitext\Serializers\Description\AnyValueSerializer() );
 		$serializer->addSerializer( new \Ask\Wikitext\Serializers\Description\SomePropertySerializer() );
 		$serializer->addSerializer( new \Ask\Wikitext\Serializers\Description\ValueDescriptionSerializer() );
+		$serializer->addSerializer( new \Ask\Wikitext\Serializers\Description\ConjunctionSerializer() );
+		$serializer->addSerializer( new \Ask\Wikitext\Serializers\Description\DisjunctionSerializer() );
 		return $serializer;
 	}
 
