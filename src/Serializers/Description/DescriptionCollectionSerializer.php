@@ -16,9 +16,9 @@ use Serializers\DispatchingSerializer;
 class DescriptionCollectionSerializer implements DispatchableSerializer {
 
 	/**
-	 * @var String
+	 * @var string
 	 */
-	private $operator = '';
+	private $separator = '';
 
 	/**
 	 * @var DispatchingSerializer
@@ -28,8 +28,8 @@ class DescriptionCollectionSerializer implements DispatchableSerializer {
 	/**
 	 * @param string $operator used to concatenate the parts
 	 */
-	public function __construct($operator) {
-		$this->operator = $operator;
+	public function __construct( $operator ) {
+		$this->separator = $operator;
 	}
 
 	/**
@@ -55,7 +55,7 @@ class DescriptionCollectionSerializer implements DispatchableSerializer {
 		$firstItem = true;
 		foreach ( $collection->getDescriptions() as $description) {
 			if (!$firstItem) {
-				$result .= $this->operator;
+				$result .= $this->separator;
 			} else {
 				$firstItem = false;
 			}
