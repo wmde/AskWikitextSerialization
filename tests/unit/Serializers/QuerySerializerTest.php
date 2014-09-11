@@ -43,7 +43,12 @@ class QuerySerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testQueryWithNonDefaultOption() {
-		$this->markTestIncomplete();
+		$propertyId = new StringValue( 'P42' );
+		$description = new SomeProperty( $propertyId, new ValueDescription( new StringValue( 'brett' ) ) );
+		$options = new QueryOptions(21, 42);
+		$query = new Query( $description, array(), $options );
+
+		$this->assertEquals( '[[P42::brett]] limit=21 offset=42', $this->serializer->serialize( $query ) );
 	}
 
 	public function testQueryWithSelectionRequest() {
