@@ -68,7 +68,7 @@ class DescriptionCollectionSerializer implements DispatchableSerializer {
 	 * @return DispatchingSerializer
 	 */
 	private function serializer() {
-		if (is_null($this->descriptionSerializer)) {
+		if ( is_null( $this->descriptionSerializer ) ) {
 			$factory = new Factory();
 			$this->descriptionSerializer = $factory->createDescriptionSerializer();
 		}

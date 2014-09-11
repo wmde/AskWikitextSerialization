@@ -41,8 +41,8 @@ class ConjunctionSerializer implements DispatchableSerializer {
 	 * @return DescriptionCollectionSerializer
 	 */
 	private function serializer() {
-		if (is_null($this->collectionSerializer)) {
-			$this->collectionSerializer = new DescriptionCollectionSerializer(' ');
+		if ( is_null( $this->collectionSerializer ) ) {
+			$this->collectionSerializer = new DescriptionCollectionSerializer( ' ' );
 		}
 		return $this->collectionSerializer;
 	}

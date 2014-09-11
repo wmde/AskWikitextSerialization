@@ -41,8 +41,8 @@ class DisjunctionSerializer implements DispatchableSerializer {
 	 * @return DescriptionCollectionSerializer
 	 */
 	private function serializer() {
-		if (is_null($this->collectionSerializer)) {
-			$this->collectionSerializer = new DescriptionCollectionSerializer(' OR ');
+		if ( is_null( $this->collectionSerializer ) ) {
+			$this->collectionSerializer = new DescriptionCollectionSerializer( ' OR ' );
 		}
 		return $this->collectionSerializer;
 	}
