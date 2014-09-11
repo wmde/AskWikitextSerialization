@@ -29,19 +29,19 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDescriptionSerializerGivenNotDescription_serializeThrowsException() {
-		$serializer = $this->factory->createDescriptionSerializer();
+		$serializer = $this->factory->newDescriptionSerializer();
 		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
 		$serializer->serialize( new PropertySelection( new StringValue( 'foo' ) ) );
 	}
 
 	public function testDescriptionSerializerWithAnyValue() {
-		$serializer = $this->factory->createDescriptionSerializer();
+		$serializer = $this->factory->newDescriptionSerializer();
 		$anyValue = new AnyValue();
 		$this->assertInternalType( 'string', $serializer->serialize( $anyValue ) );
 	}
 
 	public function testDescriptionSerializerWithSomeProperty() {
-		$serializer = $this->factory->createDescriptionSerializer();
+		$serializer = $this->factory->newDescriptionSerializer();
 		$propertyId = new StringValue( 'P42' );
 		$someProperty = new SomeProperty( $propertyId, new AnyValue() );
 
@@ -49,7 +49,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDescriptionSerializerWithValueDescription() {
-		$serializer = $this->factory->createDescriptionSerializer();
+		$serializer = $this->factory->newDescriptionSerializer();
 		$stringValue = new StringValue( 'foo' );
 		$valueDescription = new ValueDescription( $stringValue );
 
@@ -57,7 +57,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDescriptionSerializerWithConjunction() {
-		$serializer = $this->factory->createDescriptionSerializer();
+		$serializer = $this->factory->newDescriptionSerializer();
 		$propertyId = new StringValue( 'P42' );
 		$conjunction = new Conjunction(
 			array(
@@ -70,7 +70,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDescriptionSerializerWithDisjunction() {
-		$serializer = $this->factory->createDescriptionSerializer();
+		$serializer = $this->factory->newDescriptionSerializer();
 		$propertyId = new StringValue( 'P42' );
 		$conjunction = new Disjunction(
 			array(

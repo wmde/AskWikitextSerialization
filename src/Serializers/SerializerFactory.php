@@ -3,8 +3,7 @@
 namespace Ask\Wikitext\Serializers;
 
 use Ask\Wikitext\Serializers\Description\AnyValueSerializer;
-use Ask\Wikitext\Serializers\Description\ConjunctionSerializer;
-use Ask\Wikitext\Serializers\Description\DisjunctionSerializer;
+use Ask\Wikitext\Serializers\Description\DescriptionCollectionSerializer;
 use Ask\Wikitext\Serializers\Description\SomePropertySerializer;
 use Ask\Wikitext\Serializers\Description\ValueDescriptionSerializer;
 use Serializers\DispatchingSerializer;
@@ -18,13 +17,14 @@ class SerializerFactory {
 	/**
 	 * @return DispatchingSerializer
 	 */
-	public function createDescriptionSerializer() {
+	public function newDescriptionSerializer() {
 		$serializer = new DispatchingSerializer();
+
 		$serializer->addSerializer( new AnyValueSerializer() );
 		$serializer->addSerializer( new SomePropertySerializer() );
 		$serializer->addSerializer( new ValueDescriptionSerializer() );
-		$serializer->addSerializer( new ConjunctionSerializer() );
-		$serializer->addSerializer( new DisjunctionSerializer() );
+		$serializer->addSerializer( new DescriptionCollectionSerializer( $serializer ) );
+
 		return $serializer;
 	}
 

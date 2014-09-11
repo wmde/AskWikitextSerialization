@@ -49,7 +49,7 @@ class QuerySerializer implements DispatchableSerializer {
 	private function descriptionDispatcher() {
 		if (is_null($this->descriptionSerializer)) {
 			$factory = new SerializerFactory();
-			$this->descriptionSerializer = $factory->createDescriptionSerializer();
+			$this->descriptionSerializer = $factory->newDescriptionSerializer();
 		}
 		return $this->descriptionSerializer;
 	}
