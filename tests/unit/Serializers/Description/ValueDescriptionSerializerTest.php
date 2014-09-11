@@ -1,11 +1,12 @@
 <?php
 
-namespace Ask\Tests\Ask\Wikitext\Formatter\Description;
+namespace Ask\Tests\Ask\Wikitext\Serializers\Description;
 
 use Ask\Language\Description\ValueDescription;
 use Ask\Wikitext\Serializers\Description\ValueDescriptionSerializer;
 use DataValues\StringValue;
 use Serializers\Serializer;
+use Ask\Language\Description\AnyValue;
 
 /**
  * @covers Ask\Wikitext\Serializers\Description\ValueDescriptionSerializer
@@ -27,7 +28,7 @@ class ValueDescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNonValueDescription_serializeThrowsException() {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$this->serializer->serialize( null );
+		$this->serializer->serialize( new AnyValue() );
 	}
 
 	/**
@@ -45,8 +46,22 @@ class ValueDescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function comparatorProvider() {
 		return array(
 			array( ValueDescription::COMP_EQUAL, 'foobar' ),
-			array( ValueDescription::COMP_GREATER, '>foobar' ),
+			array( ValueDescription::COMP_LEQ, '≤foobar' ),
+			array( ValueDescription::COMP_GEQ, '≥foobar' ),
+			array( ValueDescription::COMP_NEQ, '!foobar' ),
+			array( ValueDescription::COMP_LIKE, '~foobar' ),
+			array( ValueDescription::COMP_NLIKE, '!~foobar' ),
+			array( ValueDescription::COMP_LESS, '<<foobar' ),
+			array( ValueDescription::COMP_GREATER, '>>foobar' ),
 		);
+	}
+
+	public function testGivenValueDescriptionWithEscapingOfValueStartingWithComparator() {
+		$this->markTestIncomplete();
+	}
+
+	public function testGivenValueDescriptionWithValueThatDoesNotCastToString() {
+		$this->markTestIncomplete();
 	}
 
 }
