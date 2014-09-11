@@ -47,7 +47,7 @@ class QuerySerializer implements DispatchableSerializer {
 	 * @return DispatchingSerializer
 	 */
 	private function descriptionDispatcher() {
-		if (is_null($this->descriptionSerializer)) {
+		if ( is_null( $this->descriptionSerializer ) ) {
 			$factory = new SerializerFactory();
 			$this->descriptionSerializer = $factory->createDescriptionSerializer();
 		}
@@ -58,7 +58,7 @@ class QuerySerializer implements DispatchableSerializer {
 	 * @return QueryOptionsSerializer
 	 */
 	private function optionsDispatcher() {
-		if (is_null($this->optionsSerializer)) {
+		if ( is_null( $this->optionsSerializer ) ) {
 			$this->optionsSerializer = new QueryOptionsSerializer();
 		}
 		return $this->optionsSerializer;
