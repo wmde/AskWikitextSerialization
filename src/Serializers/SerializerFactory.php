@@ -13,7 +13,7 @@ use Serializers\DispatchingSerializer;
  * @licence GNU GPL v2+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class Factory {
+class SerializerFactory {
 
 	/**
 	 * @return DispatchingSerializer

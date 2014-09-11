@@ -5,7 +5,7 @@ namespace Ask\Wikitext\Serializers\Description;
 use Serializers\DispatchableSerializer;
 use InvalidArgumentException;
 use Ask\Language\Description\SomeProperty;
-use Ask\Wikitext\Serializers\Factory;
+use Ask\Wikitext\Serializers\SerializerFactory;
 
 /**
  * @licence GNU GPL v2+
@@ -38,7 +38,7 @@ class SomePropertySerializer implements DispatchableSerializer {
 	}
 
 	private function serializeSubDescription( SomeProperty $someProperty ) {
-		$factory = new Factory();
+		$factory = new SerializerFactory();
 		$serializer = $factory->createDescriptionSerializer();
 		$subDescription = $someProperty->getSubDescription();
 		$serialized = $serializer->serialize( $subDescription );

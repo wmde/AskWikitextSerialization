@@ -2,7 +2,7 @@
 
 namespace Ask\Tests\Ask\Wikitext\Serializers;
 
-use Ask\Wikitext\Serializers\Factory;
+use Ask\Wikitext\Serializers\SerializerFactory;
 use Ask\Language\Selection\PropertySelection;
 use DataValues\StringValue;
 use Ask\Language\Description\AnyValue;
@@ -12,20 +12,20 @@ use Ask\Language\Description\Conjunction;
 use Ask\Language\Description\Disjunction;
 
 /**
- * @covers Ask\Wikitext\Serializers\Factory
+ * @covers Ask\Wikitext\Serializers\SerializerFactory
  *
  * @licence GNU GPL v2+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase {
+class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var Factory
+	 * @var SerializerFactory
 	 */
 	private $factory;
 
 	public function setUp() {
-		$this->factory = new Factory();
+		$this->factory = new SerializerFactory();
 	}
 
 	public function testDescriptionSerializerGivenNotDescription_serializeThrowsException() {

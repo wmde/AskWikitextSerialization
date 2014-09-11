@@ -6,7 +6,7 @@ use Serializers\DispatchableSerializer;
 use Ask\Language\Description\DescriptionCollection;
 use Ask\Language\Description\Description;
 use InvalidArgumentException;
-use Ask\Wikitext\Serializers\Factory;
+use Ask\Wikitext\Serializers\SerializerFactory;
 use Serializers\DispatchingSerializer;
 
 /**
@@ -69,7 +69,7 @@ class DescriptionCollectionSerializer implements DispatchableSerializer {
 	 */
 	private function serializer() {
 		if ( is_null( $this->descriptionSerializer ) ) {
-			$factory = new Factory();
+			$factory = new SerializerFactory();
 			$this->descriptionSerializer = $factory->createDescriptionSerializer();
 		}
 		return $this->descriptionSerializer;

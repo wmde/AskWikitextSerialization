@@ -6,7 +6,7 @@ use Serializers\DispatchableSerializer;
 use Ask\Language\Query;
 use InvalidArgumentException;
 use Serializers\DispatchingSerializer;
-use Ask\Wikitext\Serializers\Factory;
+use Ask\Wikitext\Serializers\SerializerFactory;
 use Ask\Wikitext\Serializers\Option\QueryOptionsSerializer;
 
 /**
@@ -48,7 +48,7 @@ class QuerySerializer implements DispatchableSerializer {
 	 */
 	private function descriptionDispatcher() {
 		if (is_null($this->descriptionSerializer)) {
-			$factory = new Factory();
+			$factory = new SerializerFactory();
 			$this->descriptionSerializer = $factory->createDescriptionSerializer();
 		}
 		return $this->descriptionSerializer;
