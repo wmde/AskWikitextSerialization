@@ -51,32 +51,28 @@ class DescriptionCollectionSerializer implements DispatchableSerializer {
 	}
 
 	private function serializeCollection( DescriptionCollection $collection ) {
-		$result = '';
-		$firstItem = true;
+		$serializations = array();
+
 		foreach ( $collection->getDescriptions() as $description) {
-			if (!$firstItem) {
-				$result .= $this->separator;
-			} else {
-				$firstItem = false;
-			}
-			$result .= $this->serializeDescription( $description );
+			$serializations[] = $this->serializeDescription( $description );
 		}
-		return $result;
+		
+		return implode( $this->separator, $serializations );
+	}
+
+	private function serializeDescription( Description $description ) {
+		return $this->getSerializer()->serialize( $description );
 	}
 
 	/**
 	 * @return DispatchingSerializer
 	 */
-	private function serializer() {
+	private function getSerializer() {
 		if ( is_null( $this->descriptionSerializer ) ) {
 			$factory = new SerializerFactory();
 			$this->descriptionSerializer = $factory->createDescriptionSerializer();
 		}
 		return $this->descriptionSerializer;
-	}
-
-	private function serializeDescription( Description $description ) {
-		return $this->serializer()->serialize( $description );
 	}
 
 }
