@@ -42,4 +42,11 @@ class QuerySerializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( '[[P42::brett]]', $this->serializer->serialize( $query ) );
 	}
 
+	public function testQueryWithNonDefaultOption() {
+		$this->markTestIncomplete();
+	}
+
+	public function testQueryWithSelectionRequest() {
+		$this->markTestIncomplete();
+	}
 }

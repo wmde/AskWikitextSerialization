@@ -46,6 +46,10 @@ class SomePropertySerializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( '[[P42::<q>[[P21::+]]</q>]]', $this->serializer->serialize( $someProperty ) );
 	}
 
+	public function testGivenSomePropertyWithEscapingOfLiteralValueLikeSubquery() {
+		$this->markTestIncomplete();
+	}
+
 	public function testGivenSomePropertyWithValueThatDoesNotCastToString() {
 		$this->markTestIncomplete();
 	}

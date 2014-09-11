@@ -56,6 +56,10 @@ class ValueDescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGivenValueDescriptionWithEscapingOfValueStartingWithComparator() {
+		$this->markTestIncomplete();
+	}
+
 	public function testGivenValueDescriptionWithValueThatDoesNotCastToString() {
 		$this->markTestIncomplete();
 	}
