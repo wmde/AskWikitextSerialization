@@ -8,28 +8,30 @@ use Ask\Language\Description\Description;
 use InvalidArgumentException;
 use Ask\Wikitext\Serializers\SerializerFactory;
 use Serializers\DispatchingSerializer;
+use Serializers\Serializer;
 
 /**
  * @licence GNU GPL v2+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class DescriptionCollectionSerializer implements DispatchableSerializer {
 
 	/**
-	 * @var String
+	 * @var string[]
 	 */
-	private $operator = '';
+	private $separators;
 
 	/**
-	 * @var DispatchingSerializer
+	 * @param Serializer $descriptionSerializer
 	 */
-	private $descriptionSerializer = null;
+	public function __construct( Serializer $descriptionSerializer ) {
+		$this->descriptionSerializer = $descriptionSerializer;
 
-	/**
-	 * @param string $operator used to concatenate the parts
-	 */
-	public function __construct($operator) {
-		$this->operator = $operator;
+		$this->separators = array(
+			'conjunction' => ' ',
+			'disjunction' => ' OR ',
+		);
 	}
 
 	/**
@@ -51,32 +53,17 @@ class DescriptionCollectionSerializer implements DispatchableSerializer {
 	}
 
 	private function serializeCollection( DescriptionCollection $collection ) {
-		$result = '';
-		$firstItem = true;
+		$serializations = array();
+
 		foreach ( $collection->getDescriptions() as $description) {
-			if (!$firstItem) {
-				$result .= $this->operator;
-			} else {
-				$firstItem = false;
-			}
-			$result .= $this->serializeDescription( $description );
+			$serializations[] = $this->descriptionSerializer->serialize( $description );
 		}
-		return $result;
+
+		return implode( $this->getSeparator( $collection ), $serializations );
 	}
 
-	/**
-	 * @return DispatchingSerializer
-	 */
-	private function serializer() {
-		if ( is_null( $this->descriptionSerializer ) ) {
-			$factory = new SerializerFactory();
-			$this->descriptionSerializer = $factory->createDescriptionSerializer();
-		}
-		return $this->descriptionSerializer;
-	}
-
-	private function serializeDescription( Description $description ) {
-		return $this->serializer()->serialize( $description );
+	private function getSeparator( DescriptionCollection $collection ) {
+		return $this->separators[$collection->getType()];
 	}
 
 }

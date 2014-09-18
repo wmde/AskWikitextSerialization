@@ -3,18 +3,17 @@
 namespace Ask\Tests\Ask\Wikitext\Serializers\Description;
 
 use Ask\Language\Description\Conjunction;
+use Ask\Language\Description\Disjunction;
 use Ask\Wikitext\Serializers\Description\DescriptionCollectionSerializer;
 use Serializers\Serializer;
 use Ask\Language\Description\AnyValue;
-use Ask\Language\Description\SomeProperty;
-use Ask\Language\Description\ValueDescription;
-use DataValues\StringValue;
 
 /**
  * @covers Ask\Wikitext\Serializers\Description\DescriptionCollectionSerializer
  *
  * @licence GNU GPL v2+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class DescriptionCollectionSerializerTest extends \PHPUnit_Framework_TestCase {
 
@@ -24,7 +23,19 @@ class DescriptionCollectionSerializerTest extends \PHPUnit_Framework_TestCase {
 	private $serializer;
 
 	public function setUp() {
-		$this->serializer = new DescriptionCollectionSerializer( ':' );
+		$this->serializer = new DescriptionCollectionSerializer(
+			$this->getStubDescriptionSerializer()
+		);
+	}
+
+	private function getStubDescriptionSerializer() {
+		$serializer = $this->getMock( 'Serializers\Serializer' );
+
+		$serializer->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnValue( '[[kittens]]' ) );
+
+		return $serializer;
 	}
 
 	public function testGivenNonCollection_serializeThrowsException() {
@@ -32,16 +43,48 @@ class DescriptionCollectionSerializerTest extends \PHPUnit_Framework_TestCase {
 		$this->serializer->serialize( new AnyValue() );
 	}
 
-	public function testFormatCollection() {
-		$propertyId = new StringValue( 'P42' );
+	public function testGivenEmptyCollection_emptyStringIsReturned() {
+		$this->assertSame( '', $this->serializer->serialize( new Conjunction( array() ) ) );
+	}
+
+	public function testGivenCollectionWithOneDescription_onlyDescriptionIsReturned() {
 		$collection = new Conjunction(
 			array(
-				new SomeProperty( $propertyId, new ValueDescription( new StringValue( 'foobar' ) ) ),
-				new SomeProperty( $propertyId, new ValueDescription( new StringValue( 'mubuz' ) ) ),
+				$this->getMock( 'Ask\Language\Description\Description' ),
 			)
 		);
 
-		$this->assertEquals( '[[P42::foobar]]:[[P42::mubuz]]', $this->serializer->serialize( $collection ) );
+		$this->assertSame( '[[kittens]]', $this->serializer->serialize( $collection ) );
+	}
+
+	public function testGivenConjunction_spaceIsUsedAsSeparator() {
+		$collection = new Conjunction(
+			array(
+				$this->getMock( 'Ask\Language\Description\Description' ),
+				$this->getMock( 'Ask\Language\Description\Description' ),
+				$this->getMock( 'Ask\Language\Description\Description' ),
+			)
+		);
+
+		$this->assertSame(
+			'[[kittens]] [[kittens]] [[kittens]]',
+			$this->serializer->serialize( $collection )
+		);
+	}
+
+	public function testGivenDisjunction_orIsUsedAsSeparator() {
+		$collection = new Disjunction(
+			array(
+				$this->getMock( 'Ask\Language\Description\Description' ),
+				$this->getMock( 'Ask\Language\Description\Description' ),
+				$this->getMock( 'Ask\Language\Description\Description' ),
+			)
+		);
+
+		$this->assertSame(
+			'[[kittens]] OR [[kittens]] OR [[kittens]]',
+			$this->serializer->serialize( $collection )
+		);
 	}
 
 }

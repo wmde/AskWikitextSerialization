@@ -39,7 +39,7 @@ class SomePropertySerializer implements DispatchableSerializer {
 
 	private function serializeSubDescription( SomeProperty $someProperty ) {
 		$factory = new SerializerFactory();
-		$serializer = $factory->createDescriptionSerializer();
+		$serializer = $factory->newDescriptionSerializer();
 		$subDescription = $someProperty->getSubDescription();
 		$serialized = $serializer->serialize( $subDescription );
 		if ( $serialized[0] !== '[' ) {
