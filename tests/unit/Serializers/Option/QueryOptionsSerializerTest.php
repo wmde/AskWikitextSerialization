@@ -3,9 +3,13 @@
 namespace Ask\Tests\Ask\Wikitext\Serializers\Option;
 
 use Ask\Language\Option\QueryOptions;
+use Ask\Language\Option\SortOptions;
+use Ask\Language\Option\SortExpression;
+use Ask\Language\Option\PropertyValueSortExpression;
 use Serializers\Serializer;
 use Ask\Wikitext\Serializers\Option\QueryOptionsSerializer;
 use Ask\Language\Description\AnyValue;
+use DataValues\StringValue;
 
 /**
  * @covers Ask\Wikitext\Serializers\Option\QueryOptionsSerializer
@@ -48,7 +52,13 @@ class QueryOptionsSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testQueryOptionsWithSortOption() {
-		$this->markTestIncomplete();
+		$expressions = array(
+			new PropertyValueSortExpression( new StringValue( 'P42' ), SortExpression::DIRECTION_ASCENDING ),
+			new PropertyValueSortExpression( new StringValue( 'P23' ), SortExpression::DIRECTION_DESCENDING ),
+		);
+		$options = new QueryOptions(0, 0, new SortOptions( $expressions ) );
+
+		$this->assertEquals( 'sort=P42,P23 order=asc,desc', $this->serializer->serialize( $options ) );
 	}
 
 }
