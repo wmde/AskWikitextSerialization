@@ -1,3 +1,5 @@
+This library is no longer under development and is no longer maintained.
+
 # Ask Wikitext Serialization
 
 Wikitext serialializers and deserializers for the Ask query language.
